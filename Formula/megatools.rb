@@ -1,5 +1,5 @@
 class Megatools < Formula
-  desc "Command-line client for Mega.co.nz"
+  desc "Command-line client for Mega.nz"
   homepage "https://megatools.megous.com/"
   url "https://megatools.megous.com/builds/megatools-1.10.2.tar.gz"
   sha256 "179e84c68e24696c171238a72bcfe5e28198e4c4e9f9043704f36e5c0b17c38a"
@@ -12,7 +12,12 @@ class Megatools < Formula
     sha256 "956a0731c11c8ae3f999386cc95d57a787a19ad7ead8007b09efc7a96412c034" => :el_capitan
   end
 
-  depends_on "asciidoc" => :build
+  devel do
+    version "1.11.0-git-20181216"
+    url "https://megatools.megous.com/builds/experimental/megatools-1.11.0-git-20181216.tar.gz"
+    sha256 "3fbdc89a2f103ee33bbd917fb9c7adbfba8f14bd1bbb061fe75adbb69d91dc09"
+  end
+
   depends_on "pkg-config" => :build
   depends_on "glib"
   depends_on "glib-networking"
@@ -28,9 +33,15 @@ class Megatools < Formula
 
   test do
     # Downloads a publicly hosted file and verifies its contents.
-    system "#{bin}/megadl",
-      "https://mega.co.nz/#!3Q5CnDCb!PivMgZPyf6aFnCxJhgFLX1h9uUTy9ehoGrEcAkGZSaI",
-      "--path", "testfile.txt"
+    if build.devel?
+      system "#{bin}/megatools", "dl",
+        "https://mega.co.nz/#!3Q5CnDCb!PivMgZPyf6aFnCxJhgFLX1h9uUTy9ehoGrEcAkGZSaI",
+        "--path", "testfile.txt"
+    else
+      system "#{bin}/megadl",
+        "https://mega.co.nz/#!3Q5CnDCb!PivMgZPyf6aFnCxJhgFLX1h9uUTy9ehoGrEcAkGZSaI",
+        "--path", "testfile.txt"
+    end
     assert_equal File.read("testfile.txt"), "Hello Homebrew!\n"
   end
 end
