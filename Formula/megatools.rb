@@ -13,9 +13,9 @@ class Megatools < Formula
   end
 
   devel do
-    version "1.11.0-git-20181216"
-    url "https://megatools.megous.com/builds/experimental/megatools-1.11.0-git-20181216.tar.gz"
-    sha256 "3fbdc89a2f103ee33bbd917fb9c7adbfba8f14bd1bbb061fe75adbb69d91dc09"
+    version "1.11.0-git-20190107"
+    url "https://megatools.megous.com/builds/experimental/megatools-#{version}.tar.gz"
+    sha256 "9d82e99a8904489a872a451e2b4184d4d5af354142c69061b92955d9c79a4250"
   end
 
   depends_on "pkg-config" => :build
