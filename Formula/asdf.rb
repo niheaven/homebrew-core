@@ -16,6 +16,9 @@ class Asdf < Formula
   depends_on "readline"
   depends_on "unixodbc"
 
+  conflicts_with "homeshick",
+    :because => "asdf and homeshick both install files in lib/commands"
+
   def install
     bash_completion.install "completions/asdf.bash"
     fish_completion.install "completions/asdf.fish"
@@ -25,15 +28,6 @@ class Asdf < Formula
     inreplace "#{lib}/commands/reshim.sh",
               "exec $(asdf_dir)/bin/private/asdf-exec ",
               "exec $(asdf_dir)/libexec/private/asdf-exec "
-  end
-
-  def caveats; <<~EOS
-    Add the following line to your bash profile (e.g. ~/.bashrc, ~/.profile, or ~/.bash_profile)
-         source #{opt_prefix}/asdf.sh
-
-    If you use Fish shell, add the following line to your fish config (e.g. ~/.config/fish/config.fish)
-         source #{opt_prefix}/asdf.fish
-  EOS
   end
 
   test do

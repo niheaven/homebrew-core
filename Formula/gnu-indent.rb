@@ -6,10 +6,10 @@ class GnuIndent < Formula
   sha256 "e77d68c0211515459b8812118d606812e300097cfac0b4e9fb3472664263bb8b"
 
   bottle do
-    rebuild 2
-    sha256 "50423ce5f77533f53193feab08d5286b0aff91bcfb27ab39d21f7885c526948d" => :mojave
-    sha256 "e0ceb20d551e2c5942687c7740e4b5164729462c295104e363160c640f1f23ed" => :high_sierra
-    sha256 "ffd5c78abc42d3b2e565e91a60deac1cf3b6f0c47eceae11994b2d07205333a6" => :sierra
+    rebuild 3
+    sha256 "424a7f469abb096382488440e00d55021d97405d8e72948cff93fb7826f71285" => :mojave
+    sha256 "ef3e9fa08a9cf100dcd9d5e85a17c88791b78fee201eba5ce8935da5072e4670" => :high_sierra
+    sha256 "73fb630f7391e4598bfeb823637f67ba8741926133813f00bde91dfd8a4f2972" => :sierra
   end
 
   depends_on "gettext"
@@ -28,6 +28,8 @@ class GnuIndent < Formula
 
     (libexec/"gnubin").install_symlink bin/"gindent" => "indent"
     (libexec/"gnuman/man1").install_symlink man1/"gindent.1" => "indent.1"
+
+    libexec.install_symlink "gnuman" => "man"
   end
 
   def caveats; <<~EOS
@@ -36,11 +38,6 @@ class GnuIndent < Formula
     to your PATH from your bashrc like:
 
         PATH="#{opt_libexec}/gnubin:$PATH"
-
-    Additionally, you can access its man page with normal name if you add
-    the "gnuman" directory to your MANPATH from your bashrc as well:
-
-        MANPATH="#{opt_libexec}/gnuman:$MANPATH"
   EOS
   end
 

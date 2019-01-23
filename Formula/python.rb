@@ -3,12 +3,14 @@ class Python < Formula
   homepage "https://www.python.org/"
   url "https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz"
   sha256 "f09d83c773b9cc72421abba2c317e4e6e05d919f9bcf34468e192b6a6c8e328d"
+  revision 1
   head "https://github.com/python/cpython.git"
 
   bottle do
-    sha256 "ea3a8b291cfcf494788dc5bd7cde446d2de49ed2d252ba721a25dea0dc177ebb" => :mojave
-    sha256 "00d1d9e326cff16943a226956a851c47069631ea6a352aac0735e2959e0379dd" => :high_sierra
-    sha256 "35c7dd45474e864137514e54526ce5530e506bdcbd376a03b4a5d8cfdaa11d5a" => :sierra
+    rebuild 1
+    sha256 "7e575580253da04502affddce965de02a7088a88632ce5cb8ac34722cd6a4aaf" => :mojave
+    sha256 "2c2e4b4cf24e7e3bc43dbcfaf6047053a52bd4bab0eeff8d1d110c87140731d8" => :high_sierra
+    sha256 "683f2adf25e8affa6f6671604ae2a3b4d96824278790571824afd35e9e69e14c" => :sierra
   end
 
   # setuptools remembers the build flags python is built with and uses them to

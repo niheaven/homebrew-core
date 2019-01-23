@@ -1,14 +1,13 @@
 class Gtkx3 < Formula
   desc "Toolkit for creating graphical user interfaces"
   homepage "https://gtk.org/"
-  url "https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.2.tar.xz"
-  sha256 "5b3b05e427cc928d103561ed2e91b2b2881fe88b1f167b0b1c9990da6aac8892"
-  revision 1
+  url "https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.4.tar.xz"
+  sha256 "d84f59ff02a87cc90c9df4a572a13eca4e3506e2bf511e2b9cbdb4526fa0cb9c"
 
   bottle do
-    sha256 "d51ec8dc45a2765a58cca5683ebbf38ef19af9d502a0b53e18535a78348899e5" => :mojave
-    sha256 "fa2706776306dda9ecb3708539f5aba3f128cee5f9f5d7c8c6cd31267568ed6a" => :high_sierra
-    sha256 "71b0a4510954ad5c9010f9e4b019b52460c44bc082cba2ec74af25345b254ea8" => :sierra
+    sha256 "30fa6c5b24422ac8be65e4f326508ad5496e3697dc0fc64e2d3656272d3732da" => :mojave
+    sha256 "8836ade4415b2830e5ae4ea8ea1ecfc707a8c45801c598d393c2b246576eeba0" => :high_sierra
+    sha256 "337f2d411af288599aceffbc01fc6072c796ea86a901e3fafd20f8bb7f4e8cb7" => :sierra
   end
 
   depends_on "gobject-introspection" => :build
@@ -20,21 +19,6 @@ class Gtkx3 < Formula
   depends_on "hicolor-icon-theme"
   depends_on "libepoxy"
   depends_on "pango"
-
-  # see https://gitlab.gnome.org/GNOME/gtk/issues/1517
-  patch :DATA
-
-  # see https://gitlab.gnome.org/GNOME/gtk/issues/1518
-  patch do
-    url "https://gitlab.gnome.org/jralls/gtk/commit/efb3888af770937c6c2c184d9beea19fbc24bb4a.patch"
-    sha256 "d847d1b4659153f0d815189039776054bccc73f85cfb967c5cc2cf0e0061d0d7"
-  end
-
-  # Upstream fix, remove in next version
-  patch do
-    url "https://gitlab.gnome.org/GNOME/gtk/commit/e105fefc4923ebd035747daa7d453243eba4a836.patch"
-    sha256 "4efd9bc0c68942a8b4f3a39f683aa0d0ee5f6836012b004e9ea083894780ed91"
-  end
 
   def install
     args = %W[
@@ -122,21 +106,3 @@ class Gtkx3 < Formula
     system "./test"
   end
 end
-
-__END__
-diff --git a/gdk/quartz/gdkevents-quartz.c b/gdk/quartz/gdkevents-quartz.c
-index 952d4a8189..642fe7f1ee 100644
---- a/gdk/quartz/gdkevents-quartz.c
-+++ b/gdk/quartz/gdkevents-quartz.c
-@@ -1551,8 +1551,10 @@ gdk_event_translate (GdkEvent *event,
-           grab = _gdk_display_get_last_device_grab (_gdk_display,
-                                                     gdk_seat_get_pointer (seat));
-         }
--      return_val = TRUE;
-     }
-+
-+  return_val = TRUE;
-+
-   switch (event_type)
-     {
-     case GDK_QUARTZ_LEFT_MOUSE_DOWN:

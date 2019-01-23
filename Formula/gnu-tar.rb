@@ -7,10 +7,10 @@ class GnuTar < Formula
 
   bottle do
     cellar :any_skip_relocation
-    rebuild 1
-    sha256 "995aa44bfdb3f8f7084c262e4d2224f8e99c32f35105c303e52e46b6853d5260" => :mojave
-    sha256 "61bc7224ce94caf83e92474be80001856047fa26ebc5d4794ba1e40f694caaa5" => :high_sierra
-    sha256 "fb09a6cab8e92a016d53ee3577baf3daded78c758e60833dbb61c4fde23a559c" => :sierra
+    rebuild 2
+    sha256 "b9e065ee7a535f28e0f40b8093d2fbd42fe7fb9cdb11978409c0362118b4c8ef" => :mojave
+    sha256 "18a704a06a6b333653f4a25783a7adbf7932cef0bad8980ba2eefd7697c8f64a" => :high_sierra
+    sha256 "8937c1698aeceec85eb5442e469b49ac706c45e8c8aa466ee2503874e5c8dcad" => :sierra
   end
 
   head do
@@ -43,6 +43,8 @@ class GnuTar < Formula
     # Symlink the executable into libexec/gnubin as "tar"
     (libexec/"gnubin").install_symlink bin/"gtar" =>"tar"
     (libexec/"gnuman/man1").install_symlink man1/"gtar.1" => "tar.1"
+
+    libexec.install_symlink "gnuman" => "man"
   end
 
   def caveats; <<~EOS
@@ -51,11 +53,6 @@ class GnuTar < Formula
     to your PATH from your bashrc like:
 
         PATH="#{opt_libexec}/gnubin:$PATH"
-
-    Additionally, you can access its man page with normal name if you add
-    the "gnuman" directory to your MANPATH from your bashrc as well:
-
-        MANPATH="#{opt_libexec}/gnuman:$MANPATH"
   EOS
   end
 
